@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 
 interface ButtonScoreProps {
-    onClick: () => void;
+  onClick: () => void;
 }
 
 const Wrapper = styled.button`
@@ -15,11 +15,11 @@ const Wrapper = styled.button`
 `;
 
 const ButtonScore: React.FC<ButtonScoreProps> = ({children, onClick}) => {
-    return (
-        <Wrapper onClick={onClick}>
-            {children}
-        </Wrapper>
-    );
+  return (
+    <Wrapper onClick={onClick}>
+      {children}
+    </Wrapper>
+  );
 };
 
 export default ButtonScore;
