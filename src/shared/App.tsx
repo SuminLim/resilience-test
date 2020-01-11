@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Route} from 'react-router-dom';
-import {Home} from "../pages";
+import {HomePage, TestPage} from "../pages";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -11,7 +11,8 @@ class App extends React.Component {
   render() {
     return (
       <Wrapper>
-        <Route exact path="/" component={Home}/>
+        <Route exact path="/" component={HomePage}/>
+        <Route path="/test" component={TestPage}/>
       </Wrapper>
     );
   }

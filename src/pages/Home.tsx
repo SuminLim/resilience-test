@@ -14,7 +14,7 @@ const ButtonStart = styled(Link)`
   display: inline-block;
 `;
 
-const Home = () => {
+const HomePage = () => {
   return (
     <div>
       <ButtonStart to="/test">
@@ -24,4 +24,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;
