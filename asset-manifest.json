@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/resiliece-test/static/css/main.5ecd60fb.chunk.css",
+    "main.js": "/resiliece-test/static/js/main.dab1f36b.chunk.js",
+    "main.js.map": "/resiliece-test/static/js/main.dab1f36b.chunk.js.map",
+    "runtime-main.js": "/resiliece-test/static/js/runtime-main.c0a4f6b6.js",
+    "runtime-main.js.map": "/resiliece-test/static/js/runtime-main.c0a4f6b6.js.map",
+    "static/js/2.ac7be6ba.chunk.js": "/resiliece-test/static/js/2.ac7be6ba.chunk.js",
+    "static/js/2.ac7be6ba.chunk.js.map": "/resiliece-test/static/js/2.ac7be6ba.chunk.js.map",
+    "index.html": "/resiliece-test/index.html",
+    "precache-manifest.0ef2c72d2aaefa00381caddc98592747.js": "/resiliece-test/precache-manifest.0ef2c72d2aaefa00381caddc98592747.js",
+    "service-worker.js": "/resiliece-test/service-worker.js",
+    "static/css/main.5ecd60fb.chunk.css.map": "/resiliece-test/static/css/main.5ecd60fb.chunk.css.map",
+    "static/js/2.ac7be6ba.chunk.js.LICENSE": "/resiliece-test/static/js/2.ac7be6ba.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c0a4f6b6.js",
+    "static/js/2.ac7be6ba.chunk.js",
+    "static/css/main.5ecd60fb.chunk.css",
+    "static/js/main.dab1f36b.chunk.js"
+  ]
+}
