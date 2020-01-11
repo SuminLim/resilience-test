@@ -2,6 +2,7 @@ import * as React from 'react';
 import CheckupBoard from "../components/CheckupBoard";
 import bind from "bind-decorator";
 import styled from "styled-components";
+import ButtonMove from "../components/ButtonMove";
 
 interface TestPageProps {
 
@@ -12,10 +13,15 @@ interface TestPageState {
   scoreList: number[]
 }
 
+const Header = styled.div`
+  margin-top: 41px;
+  display: flex;
+  justify-content: space-evenly;
+`;
+
 const NumPage = styled.span`
   display: inline-block;
   height: 32px;
-  margin-top: 41px;
   padding: 0 16px;
   font-size: 15px;
   line-height: 31px;
@@ -59,7 +65,11 @@ class TestPage extends React.Component<TestPageProps, TestPageState> {
     const { step, scoreList } = this.state;
     return (
       <div>
-        <NumPage>{step} / 10</NumPage>
+        <Header>
+          <ButtonMove>이전으로</ButtonMove>
+          <NumPage>{step} / 10</NumPage>
+          <ButtonMove>처음으로</ButtonMove>
+        </Header>
         <p>scoreList: {scoreList}</p>
 
         <Question>삶의 의미를 느끼지 못한다</Question>
