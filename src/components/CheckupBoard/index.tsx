@@ -1,9 +1,16 @@
 import React from 'react';
 import ButtonScore from "../ButtonScore";
+import styled from "styled-components";
 
 interface CheckupBoardProps {
   onSelectScore: (score: number) => void;
 }
+
+const Wrapper = styled.div`
+  button {
+    margin-right: 5px;
+  }
+`;
 
 const CheckupBoard: React.FC<CheckupBoardProps> = ({ onSelectScore }) => {
   function makeOnClick(score: number) {
@@ -13,7 +20,7 @@ const CheckupBoard: React.FC<CheckupBoardProps> = ({ onSelectScore }) => {
   }
 
   return (
-    <div>
+    <Wrapper>
       <ButtonScore onClick={makeOnClick(1)}>
         1
       </ButtonScore>
@@ -29,7 +36,7 @@ const CheckupBoard: React.FC<CheckupBoardProps> = ({ onSelectScore }) => {
       <ButtonScore onClick={makeOnClick(5)}>
         5
       </ButtonScore>
-    </div>
+    </Wrapper>
   );
 };
 
