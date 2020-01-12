@@ -4,7 +4,7 @@ import {BrowserRouter} from "react-router-dom";
 
 const Root: React.FC = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/resilience-test">
       <App/>
     </BrowserRouter>
   );
