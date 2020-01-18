@@ -44,21 +44,55 @@ const Question = styled.strong`
 
 class TestPage extends React.Component<TestPageProps, TestPageState> {
   readonly state: Readonly<TestPageState> = {
-    step: 0,
+    step: 1,
     scoreList: [],
   };
+
+  get defaultValue() {
+    const { step, scoreList } = this.state;
+    return Number(scoreList[step - 1]) || undefined;
+  }
 
   @bind
   handleOnSelectScore(score: number) {
     this.setState(
       (state) => ({
-        step: state.step + 1,
         scoreList: [
           ...state.scoreList,
           score,
         ],
       }),
+      () => {
+        setTimeout(
+          () => this.setState(
+            (state) => ({
+              step: state.step + 1,
+            }),
+          ),
+          1000,
+        );
+      }
     );
+  }
+
+  @bind
+  handleOnPrevStep() {
+    this.setState(
+      (state) => ({
+        step: state.step - 1,
+        scoreList: state.scoreList.splice(0, state.step - 1),
+      }),
+    )
+  }
+
+  @bind
+  handleOnInitStep() {
+    this.setState(
+      {
+        step: 1,
+        scoreList: [],
+      },
+    )
   }
 
   render() {
@@ -66,15 +100,24 @@ class TestPage extends React.Component<TestPageProps, TestPageState> {
     return (
       <div>
         <Header>
-          <ButtonMove>이전으로</ButtonMove>
+          {
+            step !== 1 &&
+            <ButtonMove onClick={this.handleOnPrevStep}>이전으로</ButtonMove>
+          }
           <NumPage>{step} / 10</NumPage>
-          <ButtonMove>처음으로</ButtonMove>
+          {
+            step !== 1 &&
+            <ButtonMove onClick={this.handleOnInitStep}>처음으로</ButtonMove>
+          }
         </Header>
         <p>scoreList: {scoreList}</p>
 
         <Question>삶의 의미를 느끼지 못한다</Question>
 
-        <CheckupBoard onSelectScore={this.handleOnSelectScore} />
+        <CheckupBoard
+          defaultValue={this.defaultValue}
+          onSelectScore={this.handleOnSelectScore}
+        />
       </div>
     );
   }

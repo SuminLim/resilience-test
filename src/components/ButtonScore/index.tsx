@@ -2,21 +2,26 @@ import React from 'react';
 import styled from "styled-components";
 
 interface ButtonScoreProps {
+  selected?: boolean;
+
   onClick: () => void;
 }
 
-const Wrapper = styled.button`
+const Wrapper = styled.button<{ selected?: boolean }>`
   width: 80px;
   height: 80px;
   border-radius: 50%;
   font-size: 36px;
   color: #fff;
-  background-color: #e5e5e5;
+  background-color: ${({ selected }) => selected ? '#FFD307' : '#e5e5e5'};
 `;
 
-const ButtonScore: React.FC<ButtonScoreProps> = ({children, onClick}) => {
+const ButtonScore: React.FC<ButtonScoreProps> = ({children, selected, onClick}) => {
   return (
-    <Wrapper onClick={onClick}>
+    <Wrapper
+      selected={selected}
+      onClick={onClick}
+    >
       {children}
     </Wrapper>
   );
