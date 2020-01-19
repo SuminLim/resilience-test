@@ -14,6 +14,12 @@ const Wrapper = styled.div`
   }
 `;
 
+const Description = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 5px;
+`;
+
 const CheckupBoard: React.FC<CheckupBoardProps> = ({ defaultValue, onSelectScore }) => {
   function makeOnClick(score: number) {
     return () => {
@@ -23,36 +29,42 @@ const CheckupBoard: React.FC<CheckupBoardProps> = ({ defaultValue, onSelectScore
 
   return (
     <Wrapper>
-      <ButtonScore
-        selected={defaultValue ? defaultValue >= 1 : undefined}
-        onClick={makeOnClick(1)}
-      >
-        1
-      </ButtonScore>
-      <ButtonScore
-        selected={defaultValue ? defaultValue >= 2 : undefined}
-        onClick={makeOnClick(2)}
-      >
-        2
-      </ButtonScore>
-      <ButtonScore
-        selected={defaultValue ? defaultValue >= 3 : undefined}
-        onClick={makeOnClick(3)}
-      >
-        3
-      </ButtonScore>
-      <ButtonScore
-        selected={defaultValue ? defaultValue >= 4 : undefined}
-        onClick={makeOnClick(4)}
-      >
-        4
-      </ButtonScore>
-      <ButtonScore
-        selected={defaultValue ? defaultValue >= 5 : undefined}
-        onClick={makeOnClick(5)}
-      >
-        5
-      </ButtonScore>
+      <div>
+        <ButtonScore
+          selected={defaultValue ? defaultValue >= 1 : undefined}
+          onClick={makeOnClick(1)}
+        >
+          1
+        </ButtonScore>
+        <ButtonScore
+          selected={defaultValue ? defaultValue >= 2 : undefined}
+          onClick={makeOnClick(2)}
+        >
+          2
+        </ButtonScore>
+        <ButtonScore
+          selected={defaultValue ? defaultValue >= 3 : undefined}
+          onClick={makeOnClick(3)}
+        >
+          3
+        </ButtonScore>
+        <ButtonScore
+          selected={defaultValue ? defaultValue >= 4 : undefined}
+          onClick={makeOnClick(4)}
+        >
+          4
+        </ButtonScore>
+        <ButtonScore
+          selected={defaultValue ? defaultValue >= 5 : undefined}
+          onClick={makeOnClick(5)}
+        >
+          5
+        </ButtonScore>
+      </div>
+      <Description>
+        <strong>전혀 그렇지 않다</strong>
+        <strong>매우 그렇다</strong>
+      </Description>
     </Wrapper>
   );
 };
