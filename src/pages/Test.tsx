@@ -112,7 +112,7 @@ class TestPage extends React.Component<TestPageProps, TestPageState> {
             step !== 1 &&
             <ButtonMove onClick={this.handleOnPrevStep}>이전으로</ButtonMove>
           }
-          <NumPage>{step} / 10</NumPage>
+          <NumPage>{step} / {QUESTION.length}</NumPage>
           {
             step !== 1 &&
             <ButtonMove onClick={this.handleOnInitStep}>처음으로</ButtonMove>
@@ -120,7 +120,7 @@ class TestPage extends React.Component<TestPageProps, TestPageState> {
         </Header>
         <p>scoreList: {scoreList}</p>
 
-        <Question>삶의 의미를 느끼지 못한다</Question>
+        <Question>{QUESTION[step]}</Question>
 
         <CheckupBoard
           defaultValue={this.defaultValue}
