@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 
 const Description = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   margin-top: 5px;
 `;
 

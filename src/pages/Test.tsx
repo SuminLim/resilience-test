@@ -3,6 +3,7 @@ import CheckupBoard from "../components/CheckupBoard";
 import bind from "bind-decorator";
 import styled from "styled-components";
 import ButtonMove from "../components/ButtonMove";
+import {QUESTION} from "../constants";
 
 interface TestPageProps {
 
@@ -13,10 +14,16 @@ interface TestPageState {
   scoreList: number[]
 }
 
+const Wrapper = styled.div`
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
 const Header = styled.div`
   margin-top: 41px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
 `;
 
 const NumPage = styled.span`
@@ -34,12 +41,13 @@ const NumPage = styled.span`
 const Question = styled.strong`
   display: block;
   margin: 15px 0 50px;
-  font-weight: normal;
+  font-weight: bold;
   font-size: 30px;
   line-height: 40px;
   color: #444;
   word-break: break-all;
   white-space: pre-line;
+  max-width: 700px;
 `;
 
 class TestPage extends React.Component<TestPageProps, TestPageState> {
@@ -98,7 +106,7 @@ class TestPage extends React.Component<TestPageProps, TestPageState> {
   render() {
     const { step, scoreList } = this.state;
     return (
-      <div>
+      <Wrapper>
         <Header>
           {
             step !== 1 &&
@@ -118,7 +126,7 @@ class TestPage extends React.Component<TestPageProps, TestPageState> {
           defaultValue={this.defaultValue}
           onSelectScore={this.handleOnSelectScore}
         />
-      </div>
+      </Wrapper>
     );
   }
 }
