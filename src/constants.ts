@@ -55,3 +55,4 @@ export const QUESTION = [
   '53. 사람이나 일에 대한 고마움을 한참 시간이 지난 후에야 겨우 느낀다.',
 ];
 
+export const TOTAL_QUESTION_COUNT = QUESTION.length - 1;

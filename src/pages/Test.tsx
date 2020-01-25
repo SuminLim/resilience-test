@@ -3,9 +3,10 @@ import CheckupBoard from "../components/CheckupBoard";
 import bind from "bind-decorator";
 import styled from "styled-components";
 import ButtonMove from "../components/ButtonMove";
-import {QUESTION} from "../constants";
+import {QUESTION, TOTAL_QUESTION_COUNT} from "../constants";
+import { RouteComponentProps } from 'react-router-dom';
 
-interface TestPageProps {
+interface TestPageProps extends RouteComponentProps {
 
 }
 
@@ -72,11 +73,17 @@ class TestPage extends React.Component<TestPageProps, TestPageState> {
       }),
       () => {
         setTimeout(
-          () => this.setState(
-            (state) => ({
-              step: state.step + 1,
-            }),
-          ),
+          () => {
+            if (this.state.step === TOTAL_QUESTION_COUNT) {
+              this.props.history.push('/result');
+            } else {
+              this.setState(
+                (state) => ({
+                  step: state.step + 1,
+                }),
+              );
+            }
+          },
           1000,
         );
       }
@@ -112,7 +119,7 @@ class TestPage extends React.Component<TestPageProps, TestPageState> {
             step !== 1 &&
             <ButtonMove onClick={this.handleOnPrevStep}>이전으로</ButtonMove>
           }
-          <NumPage>{step} / {QUESTION.length}</NumPage>
+          <NumPage>{step} / {TOTAL_QUESTION_COUNT}</NumPage>
           {
             step !== 1 &&
             <ButtonMove onClick={this.handleOnInitStep}>처음으로</ButtonMove>
