@@ -57,7 +57,7 @@ class TestPage extends React.Component<TestPageProps, TestPageState> {
     scoreList: [],
   };
 
-  get defaultValue() {
+  get selectedScore() {
     const { step, scoreList } = this.state;
     return Number(scoreList[step - 1]) || undefined;
   }
@@ -130,7 +130,7 @@ class TestPage extends React.Component<TestPageProps, TestPageState> {
         <Question>{QUESTION[step]}</Question>
 
         <CheckupBoard
-          defaultValue={this.defaultValue}
+          selectedValue={this.selectedScore}
           onSelectScore={this.handleOnSelectScore}
         />
       </Wrapper>

@@ -3,7 +3,7 @@ import ButtonScore from "../ButtonScore";
 import styled from "styled-components";
 
 interface CheckupBoardProps {
-  defaultValue?: number;
+  selectedValue?: number;
 
   onSelectScore: (score: number) => void;
 }
@@ -20,48 +20,48 @@ const Description = styled.div`
   margin-top: 5px;
 `;
 
-const CheckupBoard: React.FC<CheckupBoardProps> = ({ defaultValue, onSelectScore }) => {
+const CheckupBoard: React.FC<CheckupBoardProps> = ({ selectedValue, onSelectScore }) => {
   function makeOnClick(score: number) {
     return () => {
       onSelectScore(score);
     }
   }
 
-  const disabled = !!defaultValue;
+  const disabled = !!selectedValue;
 
   return (
     <Wrapper>
       <div>
         <ButtonScore
-          selected={defaultValue ? defaultValue >= 1 : undefined}
+          selected={selectedValue ? selectedValue >= 1 : undefined}
           disabled={disabled}
           onClick={makeOnClick(1)}
         >
           1
         </ButtonScore>
         <ButtonScore
-          selected={defaultValue ? defaultValue >= 2 : undefined}
+          selected={selectedValue ? selectedValue >= 2 : undefined}
           disabled={disabled}
           onClick={makeOnClick(2)}
         >
           2
         </ButtonScore>
         <ButtonScore
-          selected={defaultValue ? defaultValue >= 3 : undefined}
+          selected={selectedValue ? selectedValue >= 3 : undefined}
           disabled={disabled}
           onClick={makeOnClick(3)}
         >
           3
         </ButtonScore>
         <ButtonScore
-          selected={defaultValue ? defaultValue >= 4 : undefined}
+          selected={selectedValue ? selectedValue >= 4 : undefined}
           disabled={disabled}
           onClick={makeOnClick(4)}
         >
           4
         </ButtonScore>
         <ButtonScore
-          selected={defaultValue ? defaultValue >= 5 : undefined}
+          selected={selectedValue ? selectedValue >= 5 : undefined}
           disabled={disabled}
           onClick={makeOnClick(5)}
         >
