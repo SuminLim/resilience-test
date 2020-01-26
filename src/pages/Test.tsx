@@ -12,7 +12,7 @@ interface TestPageProps extends RouteComponentProps {
 
 interface TestPageState {
   step: number;
-  scoreList: number[]
+  scoreList: number[];
 }
 
 const Wrapper = styled.div`

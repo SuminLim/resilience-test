@@ -27,35 +27,42 @@ const CheckupBoard: React.FC<CheckupBoardProps> = ({ defaultValue, onSelectScore
     }
   }
 
+  const disabled = !!defaultValue;
+
   return (
     <Wrapper>
       <div>
         <ButtonScore
           selected={defaultValue ? defaultValue >= 1 : undefined}
+          disabled={disabled}
           onClick={makeOnClick(1)}
         >
           1
         </ButtonScore>
         <ButtonScore
           selected={defaultValue ? defaultValue >= 2 : undefined}
+          disabled={disabled}
           onClick={makeOnClick(2)}
         >
           2
         </ButtonScore>
         <ButtonScore
           selected={defaultValue ? defaultValue >= 3 : undefined}
+          disabled={disabled}
           onClick={makeOnClick(3)}
         >
           3
         </ButtonScore>
         <ButtonScore
           selected={defaultValue ? defaultValue >= 4 : undefined}
+          disabled={disabled}
           onClick={makeOnClick(4)}
         >
           4
         </ButtonScore>
         <ButtonScore
           selected={defaultValue ? defaultValue >= 5 : undefined}
+          disabled={disabled}
           onClick={makeOnClick(5)}
         >
           5
