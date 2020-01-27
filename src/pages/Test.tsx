@@ -13,6 +13,7 @@ interface TestPageProps extends RouteComponentProps {
 interface TestPageState {
   step: number;
   scoreList: number[];
+  isLoading: boolean;
 }
 
 const Wrapper = styled.div`
@@ -55,6 +56,7 @@ class TestPage extends React.Component<TestPageProps, TestPageState> {
   readonly state: Readonly<TestPageState> = {
     step: 1,
     scoreList: [],
+    isLoading: false,
   };
 
   get selectedScore() {
@@ -67,9 +69,10 @@ class TestPage extends React.Component<TestPageProps, TestPageState> {
     this.setState(
       (state) => ({
         scoreList: [
-          ...state.scoreList,
+          ...state.scoreList.splice(0, state.step - 1),
           score,
         ],
+        isLoading: true,
       }),
       () => {
         setTimeout(
@@ -80,6 +83,7 @@ class TestPage extends React.Component<TestPageProps, TestPageState> {
               this.setState(
                 (state) => ({
                   step: state.step + 1,
+                  isLoading: false,
                 }),
               );
             }
@@ -111,7 +115,7 @@ class TestPage extends React.Component<TestPageProps, TestPageState> {
   }
 
   render() {
-    const { step, scoreList } = this.state;
+    const { step, scoreList, isLoading } = this.state;
     return (
       <Wrapper>
         <Header>
@@ -131,6 +135,7 @@ class TestPage extends React.Component<TestPageProps, TestPageState> {
 
         <CheckupBoard
           selectedValue={this.selectedScore}
+          disabled={isLoading}
           onSelectScore={this.handleOnSelectScore}
         />
       </Wrapper>

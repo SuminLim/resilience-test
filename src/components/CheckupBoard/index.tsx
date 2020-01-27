@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 interface CheckupBoardProps {
   selectedValue?: number;
+  disabled?: boolean;
 
   onSelectScore: (score: number) => void;
 }
@@ -20,14 +21,12 @@ const Description = styled.div`
   margin-top: 5px;
 `;
 
-const CheckupBoard: React.FC<CheckupBoardProps> = ({ selectedValue, onSelectScore }) => {
+const CheckupBoard: React.FC<CheckupBoardProps> = ({ selectedValue, disabled, onSelectScore }) => {
   function makeOnClick(score: number) {
     return () => {
       onSelectScore(score);
     }
   }
-
-  const disabled = !!selectedValue;
 
   return (
     <Wrapper>
