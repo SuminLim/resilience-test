@@ -75,6 +75,9 @@ class TestPage extends React.Component<TestPageProps, TestPageState> {
         isLoading: true,
       }),
       () => {
+        // TODO: debug 상황에서만 로깅하고, 필요시 별도의 현재까지 입력한 점수확인 UI 를 만든다.
+        console.log(this.state.scoreList);
+
         setTimeout(
           () => {
             if (this.state.step === TOTAL_QUESTION_COUNT) {
@@ -115,7 +118,7 @@ class TestPage extends React.Component<TestPageProps, TestPageState> {
   }
 
   render() {
-    const { step, scoreList, isLoading } = this.state;
+    const { step, isLoading } = this.state;
     return (
       <Wrapper>
         <Header>
@@ -129,7 +132,6 @@ class TestPage extends React.Component<TestPageProps, TestPageState> {
             <ButtonMove onClick={this.handleOnInitStep}>처음으로</ButtonMove>
           }
         </Header>
-        <p>scoreList: {scoreList}</p>
 
         <Question>{QUESTION[step]}</Question>
 
