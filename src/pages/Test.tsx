@@ -1,19 +1,13 @@
 import * as React from 'react';
 import CheckupBoard from "../components/CheckupBoard";
-import bind from "bind-decorator";
 import styled from "styled-components";
 import ButtonMove from "../components/ButtonMove";
 import {QUESTION, TOTAL_QUESTION_COUNT} from "../constants";
 import { RouteComponentProps } from 'react-router-dom';
+import {useState} from "react";
 
 interface TestPageProps extends RouteComponentProps {
 
-}
-
-interface TestPageState {
-  step: number;
-  scoreList: number[];
-  isLoading: boolean;
 }
 
 const Wrapper = styled.div`
@@ -52,97 +46,69 @@ const Question = styled.strong`
   max-width: 700px;
 `;
 
-class TestPage extends React.Component<TestPageProps, TestPageState> {
-  readonly state: Readonly<TestPageState> = {
-    step: 1,
-    scoreList: [],
-    isLoading: false,
-  };
+const TestPageFunc: React.FC<TestPageProps> = ({ history }) => {
+  const [step, setStep] = useState<number>(1);
+  const [scoreList, setScoreList] = useState<number[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  get selectedScore() {
-    const { step, scoreList } = this.state;
-    return Number(scoreList[step - 1]) || undefined;
+  const selectedScore = Number(scoreList[step - 1]) || undefined;
+
+  function handleOnPrevStep() {
+    const prevStepValue = step - 1;
+    setStep(prevStepValue);
+    setScoreList(scoreList.splice(0, prevStepValue));
   }
 
-  @bind
-  handleOnSelectScore(score: number) {
-    this.setState(
-      (state) => ({
-        scoreList: [
-          ...state.scoreList.splice(0, state.step - 1),
-          score,
-        ],
-        isLoading: true,
-      }),
+  function handleOnInitStep() {
+    setStep(0);
+    setScoreList([]);
+  }
+
+  function handleOnSelectScore(score: number) {
+    setScoreList(
+      [
+        ...scoreList.splice(0, step - 1),
+        score,
+      ],
+    );
+    setIsLoading(true);
+
+    setTimeout(
       () => {
-        // TODO: debug 상황에서만 로깅하고, 필요시 별도의 현재까지 입력한 점수확인 UI 를 만든다.
-        console.log(this.state.scoreList);
-
-        setTimeout(
-          () => {
-            if (this.state.step === TOTAL_QUESTION_COUNT) {
-              this.props.history.push('/result');
-            } else {
-              this.setState(
-                (state) => ({
-                  step: state.step + 1,
-                  isLoading: false,
-                }),
-              );
-            }
-          },
-          1000,
-        );
-      }
-    );
-  }
-
-  @bind
-  handleOnPrevStep() {
-    this.setState(
-      (state) => ({
-        step: state.step - 1,
-        scoreList: state.scoreList.splice(0, state.step - 1),
-      }),
-    )
-  }
-
-  @bind
-  handleOnInitStep() {
-    this.setState(
-      {
-        step: 1,
-        scoreList: [],
+        if (step === TOTAL_QUESTION_COUNT) {
+          history.push('/result');
+        } else {
+          setStep(step + 1);
+          setIsLoading(false);
+        }
       },
-    )
-  }
-
-  render() {
-    const { step, isLoading } = this.state;
-    return (
-      <Wrapper>
-        <Header>
-          {
-            step !== 1 &&
-            <ButtonMove onClick={this.handleOnPrevStep}>이전으로</ButtonMove>
-          }
-          <NumPage>{step} / {TOTAL_QUESTION_COUNT}</NumPage>
-          {
-            step !== 1 &&
-            <ButtonMove onClick={this.handleOnInitStep}>처음으로</ButtonMove>
-          }
-        </Header>
-
-        <Question>{QUESTION[step]}</Question>
-
-        <CheckupBoard
-          selectedValue={this.selectedScore}
-          disabled={isLoading}
-          onSelectScore={this.handleOnSelectScore}
-        />
-      </Wrapper>
+      1000,
     );
   }
-}
 
-export default TestPage;
+  return (
+    <Wrapper>
+      <Header>
+        {
+          step !== 1 &&
+          <ButtonMove onClick={handleOnPrevStep}>이전으로</ButtonMove>
+        }
+        <NumPage>{step} / {TOTAL_QUESTION_COUNT}</NumPage>
+        {
+          step !== 1 &&
+          <ButtonMove onClick={handleOnInitStep}>처음으로</ButtonMove>
+        }
+      </Header>
+
+      <Question>{QUESTION[step]}</Question>
+
+      <CheckupBoard
+        selectedValue={selectedScore}
+        disabled={isLoading}
+        onSelectScore={handleOnSelectScore}
+      />
+    </Wrapper>
+  );
+};
+
+export default TestPageFunc;
