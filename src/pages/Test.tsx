@@ -3,11 +3,7 @@ import CheckupBoard from "../components/CheckupBoard";
 import styled from "styled-components";
 import ButtonMove from "../components/ButtonMove";
 import {QUESTION, TOTAL_QUESTION_COUNT} from "../constants";
-import { RouteComponentProps } from 'react-router-dom';
-
-interface TestPageProps extends RouteComponentProps {
-
-}
+import { useHistory } from 'react-router-dom';
 
 const Wrapper = styled.div`
   max-width: 700px;
@@ -45,7 +41,9 @@ const Question = styled.strong`
   max-width: 700px;
 `;
 
-const TestPageFunc: React.FC<TestPageProps> = ({ history }) => {
+const TestPageFunc: React.FC = () => {
+  const history = useHistory<number[]>();
+
   const [step, setStep] = useState<number>(1);
   const [scoreList, setScoreList] = useState<number[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -62,18 +60,18 @@ const TestPageFunc: React.FC<TestPageProps> = ({ history }) => {
   }, []);
 
   const handleOnSelectScore = useCallback((score: number) => {
-    setScoreList(
-      [
-        ...scoreList.splice(0, step - 1),
-        score,
-      ],
-    );
+    const updatedScoreList = [
+      ...scoreList.splice(0, step - 1),
+      score,
+    ];
+
+    setScoreList(updatedScoreList);
     setIsLoading(true);
 
     setTimeout(
       () => {
         if (step === TOTAL_QUESTION_COUNT) {
-          history.push('/result');
+          history.push('/result', updatedScoreList);
         } else {
           setStep(step + 1);
           setIsLoading(false);
@@ -99,7 +97,7 @@ const TestPageFunc: React.FC<TestPageProps> = ({ history }) => {
         }
       </Header>
 
-      <Question>{QUESTION[step]}</Question>
+      <Question>{QUESTION[step].label}</Question>
 
       <CheckupBoard
         selectedValue={selectedScore}
