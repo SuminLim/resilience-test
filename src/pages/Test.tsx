@@ -1,10 +1,9 @@
-import * as React from 'react';
+import React, { useCallback, useState } from 'react';
 import CheckupBoard from "../components/CheckupBoard";
 import styled from "styled-components";
 import ButtonMove from "../components/ButtonMove";
 import {QUESTION, TOTAL_QUESTION_COUNT} from "../constants";
 import { RouteComponentProps } from 'react-router-dom';
-import {useState} from "react";
 
 interface TestPageProps extends RouteComponentProps {
 
@@ -51,20 +50,18 @@ const TestPageFunc: React.FC<TestPageProps> = ({ history }) => {
   const [scoreList, setScoreList] = useState<number[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const selectedScore = Number(scoreList[step - 1]) || undefined;
-
-  function handleOnPrevStep() {
+  const handleOnPrevStep = useCallback(() => {
     const prevStepValue = step - 1;
     setStep(prevStepValue);
     setScoreList(scoreList.splice(0, prevStepValue));
-  }
+  }, [scoreList, step]);
 
-  function handleOnInitStep() {
+  const handleOnInitStep = useCallback(() => {
     setStep(0);
     setScoreList([]);
-  }
+  }, []);
 
-  function handleOnSelectScore(score: number) {
+  const handleOnSelectScore = useCallback((score: number) => {
     setScoreList(
       [
         ...scoreList.splice(0, step - 1),
@@ -84,7 +81,9 @@ const TestPageFunc: React.FC<TestPageProps> = ({ history }) => {
       },
       1000,
     );
-  }
+  }, [history, scoreList, step]);
+
+  const selectedScore = Number(scoreList[step - 1]) || undefined;
 
   return (
     <Wrapper>
