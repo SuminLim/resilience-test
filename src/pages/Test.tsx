@@ -4,17 +4,11 @@ import { useHistory } from 'react-router-dom';
 import CheckupBoard from "../components/CheckupBoard";
 import ButtonMove from "../components/ButtonMove";
 import Button from "../components/Button";
+import PageWrapper from "../components/PageWrapper";
 import QuestionHistoryModal from "../components/QuestionHistoryModal";
 import {QUESTION, TOTAL_QUESTION_COUNT} from "../constants";
 
-const Wrapper = styled.div`
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-`;
-
 const Header = styled.div`
-  margin-top: 41px;
   display: flex;
   justify-content: space-around;
 `;
@@ -87,7 +81,7 @@ const TestPageFunc: React.FC = () => {
   const selectedScore = Number(scoreList[step]) || undefined;
 
   return (
-    <Wrapper>
+    <PageWrapper>
       <Header>
         {
           step !== 0 &&
@@ -119,7 +113,7 @@ const TestPageFunc: React.FC = () => {
           />
         </p>
       }
-    </Wrapper>
+    </PageWrapper>
   );
 };
 
