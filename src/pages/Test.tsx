@@ -73,14 +73,14 @@ const TestPageFunc: React.FC = () => {
 
     setTimeout(
       () => {
-        if (step === TOTAL_QUESTION_COUNT) {
+        if (step === TOTAL_QUESTION_COUNT - 1) {
           history.push('/result', updatedScoreList);
         } else {
           setStep(step + 1);
           setIsLoading(false);
         }
       },
-      1000,
+      500,
     );
   }, [history, scoreList, step]);
 
@@ -99,7 +99,6 @@ const TestPageFunc: React.FC = () => {
           <ButtonMove onClick={handleOnInitStep}>처음으로</ButtonMove>
         }
       </Header>
-      <p>{scoreList}</p>
 
       <Question>{QUESTION[step].label}</Question>
 
