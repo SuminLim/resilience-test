@@ -34,6 +34,7 @@ const NumPage = styled.span`
 const Question = styled.strong`
   display: block;
   margin: 15px 0 50px;
+  height: 80px;
   font-weight: bold;
   font-size: 30px;
   line-height: 40px;
@@ -108,10 +109,17 @@ const TestPageFunc: React.FC = () => {
         onSelectScore={handleOnSelectScore}
       />
 
-      <p>
-        <Button onClick={() => setIsOpenHistoryModal(true)}>답변 목록</Button>
-        <QuestionHistoryModal isOpen={isOpenHistoryModal} scoreList={scoreList} />
-      </p>
+      {
+        step !== 0 &&
+        <p style={{ float: 'right' }}>
+          <Button onClick={() => setIsOpenHistoryModal(true)}>지난 답변 목록</Button>
+          <QuestionHistoryModal
+            isOpen={isOpenHistoryModal}
+            scoreList={scoreList}
+            onClose={() => setIsOpenHistoryModal(false)}
+          />
+        </p>
+      }
     </Wrapper>
   );
 };
