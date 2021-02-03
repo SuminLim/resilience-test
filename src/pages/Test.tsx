@@ -1,9 +1,11 @@
 import React, { useCallback, useState } from 'react';
-import CheckupBoard from "../components/CheckupBoard";
 import styled from "styled-components";
-import ButtonMove from "../components/ButtonMove";
-import {QUESTION, TOTAL_QUESTION_COUNT} from "../constants";
 import { useHistory } from 'react-router-dom';
+import CheckupBoard from "../components/CheckupBoard";
+import ButtonMove from "../components/ButtonMove";
+import Button from "../components/Button";
+import QuestionHistoryModal from "../components/QuestionHistoryModal";
+import {QUESTION, TOTAL_QUESTION_COUNT} from "../constants";
 
 const Wrapper = styled.div`
   max-width: 700px;
@@ -44,14 +46,14 @@ const Question = styled.strong`
 const TestPageFunc: React.FC = () => {
   const history = useHistory<number[]>();
 
-  const [step, setStep] = useState<number>(1);
+  const [step, setStep] = useState<number>(0);
   const [scoreList, setScoreList] = useState<number[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isOpenHistoryModal, setIsOpenHistoryModal] = useState<boolean>(false);
 
   const handleOnPrevStep = useCallback(() => {
-    const prevStepValue = step - 1;
-    setStep(prevStepValue);
-    setScoreList(scoreList.splice(0, prevStepValue));
+    setStep(step - 1);
+    setScoreList(scoreList.splice(0, step));
   }, [scoreList, step]);
 
   const handleOnInitStep = useCallback(() => {
@@ -61,7 +63,7 @@ const TestPageFunc: React.FC = () => {
 
   const handleOnSelectScore = useCallback((score: number) => {
     const updatedScoreList = [
-      ...scoreList.splice(0, step - 1),
+      ...scoreList.splice(0, step),
       score,
     ];
 
@@ -81,21 +83,22 @@ const TestPageFunc: React.FC = () => {
     );
   }, [history, scoreList, step]);
 
-  const selectedScore = Number(scoreList[step - 1]) || undefined;
+  const selectedScore = Number(scoreList[step]) || undefined;
 
   return (
     <Wrapper>
       <Header>
         {
-          step !== 1 &&
+          step !== 0 &&
           <ButtonMove onClick={handleOnPrevStep}>이전으로</ButtonMove>
         }
-        <NumPage>{step} / {TOTAL_QUESTION_COUNT}</NumPage>
+        <NumPage>{step + 1} / {TOTAL_QUESTION_COUNT}</NumPage>
         {
-          step !== 1 &&
+          step !== 0 &&
           <ButtonMove onClick={handleOnInitStep}>처음으로</ButtonMove>
         }
       </Header>
+      <p>{scoreList}</p>
 
       <Question>{QUESTION[step].label}</Question>
 
@@ -104,6 +107,11 @@ const TestPageFunc: React.FC = () => {
         disabled={isLoading}
         onSelectScore={handleOnSelectScore}
       />
+
+      <p>
+        <Button onClick={() => setIsOpenHistoryModal(true)}>답변 목록</Button>
+        <QuestionHistoryModal isOpen={isOpenHistoryModal} scoreList={scoreList} />
+      </p>
     </Wrapper>
   );
 };

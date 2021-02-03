@@ -5,9 +5,6 @@ export enum CalculationType {
 
 export const QUESTION: { label: string, calculation?: CalculationType }[] = [
   {
-    label: '각 문항을 읽은 후 다음과 같이 점수를 기록하세요.',
-  },
-  {
     label: '1. 나는 어려운 일이 닥쳤을 때 감정을 통제할 수 있다.',
     calculation: CalculationType.PLUS,
   },
@@ -221,7 +218,7 @@ export const QUESTION: { label: string, calculation?: CalculationType }[] = [
   },
 ];
 
-export const TOTAL_QUESTION_COUNT = QUESTION.length - 1;
+export const TOTAL_QUESTION_COUNT = QUESTION.length;
 
 export const ResultDescriptionMap = {
   195: '우리나라 사람들의 평균점수는 195점이다.',

@@ -9,12 +9,11 @@ const ResultPage: React.FC = () => {
 
   useEffect(() => {
     const scoreList = location.state;
-    const questionList = QUESTION.splice(1, QUESTION.length);
 
     let total = 0;
 
     scoreList.forEach((score, index) => {
-      const currentQuestion = questionList[index];
+      const currentQuestion = QUESTION[index];
 
       if (currentQuestion.calculation === CalculationType.PLUS) {
         total += score;
