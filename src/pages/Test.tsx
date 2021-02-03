@@ -36,7 +36,7 @@ const Question = styled.strong`
   font-size: 30px;
   line-height: 40px;
   color: #444;
-  word-break: break-all;
+  word-break: keep-all;
   white-space: pre-line;
   max-width: 700px;
 `;

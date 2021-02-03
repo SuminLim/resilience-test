@@ -8,6 +8,8 @@ const ButtonScore = styled.button<{ selected?: boolean }>`
   font-size: 36px;
   color: #fff;
   background-color: ${({ selected }) => selected ? '#FFD307' : '#e5e5e5'};
+
+  cursor: pointer;
 `;
 
 export default ButtonScore;
