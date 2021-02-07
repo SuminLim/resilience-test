@@ -29,7 +29,7 @@ const ColorG1 = styled.span`
 `;
 
 const ResultPage: React.FC = () => {
-  const location = useLocation<number[]>();
+  const location = useLocation<number[] | undefined>();
 
   const [totalScore, setTotalScore] = useState<number>(0);
 
@@ -52,17 +52,19 @@ const ResultPage: React.FC = () => {
 
     let total = 0;
 
-    scoreList.forEach((score, index) => {
-      const currentQuestion = QUESTION[index];
+    if (scoreList) {
+      scoreList.forEach((score, index) => {
+        const currentQuestion = QUESTION[index];
 
-      if (currentQuestion.calculation === CalculationType.PLUS) {
-        total += score;
-      }
+        if (currentQuestion.calculation === CalculationType.PLUS) {
+          total += score;
+        }
 
-      if (currentQuestion.calculation === CalculationType.MINUS) {
-        total += (6 - score);
-      }
-    });
+        if (currentQuestion.calculation === CalculationType.MINUS) {
+          total += (6 - score);
+        }
+      });
+    }
 
     setTotalScore(total);
   }, [location]);
