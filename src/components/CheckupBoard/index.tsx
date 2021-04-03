@@ -17,8 +17,11 @@ const Wrapper = styled.div`
 
 const Description = styled.div`
   display: flex;
-  justify-content: space-between;
-  margin-top: 5px;
+  justify-content: space-around;
+  margin-top: 25px;
+
+  font-size: 15px;
+  color: #444;
 `;
 
 const CheckupBoard: React.FC<CheckupBoardProps> = ({ selectedValue, disabled, onSelectScore }) => {
